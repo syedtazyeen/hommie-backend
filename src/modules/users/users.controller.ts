@@ -15,7 +15,7 @@ import { UsersService } from './users.service';
 import { SwaggerTag } from './users.swagger';
 import { RequestWithUser } from '@/src/common/types';
 import { validateObjectId } from '@/src/lib/utils/controller.utils';
-import { UpdateUserReqDto, UpdateUserStatusReqDto } from './users.dto';
+import { UpdateUserRequest, UpdateUserStatusRequest } from './users.dto';
 
 /**
  * UsersController
@@ -55,7 +55,7 @@ export class UsersController {
   @SwaggerTag.updateStatus()
   updateStatus(
     @Param('id') id: string,
-    @Body() updateStatusUserDto: UpdateUserStatusReqDto,
+    @Body() updateStatusUserDto: UpdateUserStatusRequest,
   ) {
     validateObjectId(id);
     return this.usersService.updateStatus(id, updateStatusUserDto.status);
@@ -74,7 +74,7 @@ export class UsersController {
 
   @Patch(':id')
   @SwaggerTag.update()
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserReqDto) {
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserRequest) {
     validateObjectId(id);
     return this.usersService.update(id, updateUserDto);
   }
