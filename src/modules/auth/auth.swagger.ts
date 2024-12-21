@@ -1,12 +1,6 @@
 import { ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { applyDecorators } from '@nestjs/common';
-import {
-  CheckEmailAuthReqDto,
-  CheckEmailAuthResDto,
-  LoginAuthReqDto,
-  LoginAuthResDto,
-  RegisterAuthReqDto,
-} from './auth.dto';
+import { CheckEmailAuthRequest, CheckEmailAuthResponse, LoginAuthRequest, LoginAuthResponse, RegisterAuthRequest } from './auth.dto';
 
 export const SwaggerTag = {
   validateEmail: () =>
@@ -17,12 +11,12 @@ export const SwaggerTag = {
       }),
       ApiBody({
         description: 'Check email for logging in',
-        type: CheckEmailAuthReqDto,
+        type: CheckEmailAuthRequest,
       }),
       ApiResponse({
         status: 200,
         description: 'Validate email for user',
-        type: CheckEmailAuthResDto,
+        type: CheckEmailAuthResponse,
       }),
       ApiResponse({
         status: 404,
@@ -36,12 +30,12 @@ export const SwaggerTag = {
       }),
       ApiBody({
         description: 'Credentials for logging in',
-        type: LoginAuthReqDto,
+        type: LoginAuthRequest,
       }),
       ApiResponse({
         status: 200,
         description: 'Successfully logged in a user',
-        type: LoginAuthResDto,
+        type: LoginAuthResponse,
       }),
       ApiResponse({
         status: 401,
@@ -55,7 +49,7 @@ export const SwaggerTag = {
       }),
       ApiBody({
         description: 'Details for registering a new user',
-        type: RegisterAuthReqDto,
+        type: RegisterAuthRequest,
       }),
       ApiResponse({
         status: 201,

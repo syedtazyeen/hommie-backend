@@ -7,9 +7,9 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import {
-  UpdateUserReqDto,
-  UpdateUserStatusReqDto,
-  UserResDto,
+  UpdateUserRequest,
+  UpdateUserStatusRequest,
+  UserResponse,
 } from './users.dto';
 
 export const SwaggerTag = {
@@ -30,7 +30,7 @@ export const SwaggerTag = {
       ApiResponse({
         status: 200,
         description: 'Successfully retrieved list of users',
-        type: [UserResDto],
+        type: [UserResponse],
       }),
     ),
   findone: () =>
@@ -42,7 +42,7 @@ export const SwaggerTag = {
       ApiResponse({
         status: 200,
         description: 'Successfully retrieved list of users',
-        type: UserResDto,
+        type: UserResponse,
       }),
     ),
   findme: () =>
@@ -54,7 +54,7 @@ export const SwaggerTag = {
       ApiResponse({
         status: 200,
         description: 'Successfully retrieved current user',
-        type: UserResDto,
+        type: UserResponse,
       }),
     ),
   update: () =>
@@ -63,7 +63,7 @@ export const SwaggerTag = {
       ApiOperation({
         summary: 'Update a user',
       }),
-      ApiBody({ type: UpdateUserReqDto }),
+      ApiBody({ type: UpdateUserRequest }),
       ApiResponse({
         status: 200,
         description: 'Successfully Updated a user',
@@ -91,7 +91,7 @@ export const SwaggerTag = {
         summary: 'Update a user status',
       }),
       ApiBody({
-        type: UpdateUserStatusReqDto,
+        type: UpdateUserStatusRequest,
       }),
       ApiResponse({
         status: 200,

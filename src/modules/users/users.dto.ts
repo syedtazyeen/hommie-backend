@@ -2,7 +2,7 @@ import { UserStatus } from '@/src/common/enums';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsOptional } from 'class-validator';
 
-export class UserResDto {
+export class UserResponse {
   @ApiProperty()
   id: string;
 
@@ -22,7 +22,7 @@ export class UserResDto {
   isVerified: boolean;
 }
 
-export class UpdateUserReqDto {
+export class UpdateUserRequest {
   @ApiProperty({ required: false })
   @IsOptional()
   email: string;
@@ -36,7 +36,7 @@ export class UpdateUserReqDto {
   imageUrl: string;
 }
 
-export class UpdateUserStatusReqDto {
+export class UpdateUserStatusRequest {
   @ApiProperty({ enum: UserStatus })
   @IsOptional()
   @IsEnum(UserStatus)

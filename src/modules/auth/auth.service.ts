@@ -9,7 +9,7 @@ import { UsersService } from '../users/users.service';
 import { logger } from '@/src/lib/logger';
 import { JWT_SECRET } from '@/src/common/constants';
 import { UserStatus } from '@/src/common/enums';
-import { LoginAuthReqDto, RegisterAuthReqDto } from './auth.dto';
+import { LoginAuthRequest, RegisterAuthRequest } from './auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +26,7 @@ export class AuthService {
     };
   }
 
-  async login(user: LoginAuthReqDto) {
+  async login(user: LoginAuthRequest) {
     const validatedUser = await this.validateUser(user.email, user.password);
     return {
       accessToken: this.jwtService.sign({
@@ -37,7 +37,7 @@ export class AuthService {
     };
   }
 
-  async register(registerAuthReqDto: RegisterAuthReqDto): Promise<void> {
+  async register(registerAuthReqDto: RegisterAuthRequest): Promise<void> {
     const hashedPassword = await bcrypt.hash(registerAuthReqDto.password, 10);
     await this.usersService.create({
       ...registerAuthReqDto,

@@ -3,14 +3,14 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './users.schema';
 import { UserStatus } from '@/src/common/enums';
-import { UpdateUserReqDto } from './users.dto';
-import { RegisterAuthReqDto } from '../auth/auth.dto';
+import { UpdateUserRequest } from './users.dto';
+import { RegisterAuthRequest } from '../auth/auth.dto';
 
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
-  async create(user: RegisterAuthReqDto): Promise<User> {
+  async create(user: RegisterAuthRequest): Promise<User> {
     try {
       const createdUser = new this.userModel(user);
       return await createdUser.save();
@@ -54,10 +54,10 @@ export class UsersService {
 
   async update(
     id: string,
-    updateUserDto: UpdateUserReqDto,
+    payload: UpdateUserRequest,
   ): Promise<User | null> {
     return await this.userModel
-      .findByIdAndUpdate(id, updateUserDto, { new: true })
+      .findByIdAndUpdate(id, payload, { new: true })
       .exec();
   }
 
